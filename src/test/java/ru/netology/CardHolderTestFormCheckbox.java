@@ -44,7 +44,7 @@ public class CardHolderTestFormCheckbox {
     void shouldRunUrl(){
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Олег Иванов");
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998887755");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998887733");
 //        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("[role=button]")).click();
         String expected = "Я соглашаюсь с условиями обработки и использования моих персональных данных и разрешаю сделать запрос в бюро кредитных историй";
