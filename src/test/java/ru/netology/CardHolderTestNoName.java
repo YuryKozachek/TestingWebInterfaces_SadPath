@@ -18,9 +18,7 @@ public class CardHolderTestNoName {
 
     @BeforeAll
     static void setUpAll() {
-//        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
         WebDriverManager.chromedriver().setup();
-
     }
 
     @BeforeEach
@@ -31,7 +29,6 @@ public class CardHolderTestNoName {
         options.addArguments("--headless");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-
     }
 
     @AfterEach
@@ -41,15 +38,14 @@ public class CardHolderTestNoName {
     }
 
     @Test
-    void shouldRunUrl(){
+    void shouldCheckFormNoName(){
         driver.get("http://localhost:9999/");
-//        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Alex");
-//        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998887755");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998887755");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("[role=button]")).click();
         String expected = "Поле обязательно для заполнения";
-        String actual = driver.findElement(By.cssSelector("[data-test-id=name] .input__sub")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
-
     }
 }

@@ -12,12 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CardHolderTest {
     private WebDriver driver;
 
-
     @BeforeAll
     static void setUpAll() {
-//        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
         WebDriverManager.chromedriver().setup();
-
     }
 
     @BeforeEach
@@ -28,7 +25,6 @@ public class CardHolderTest {
         options.addArguments("--headless");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-
     }
 
     @AfterEach
@@ -38,7 +34,7 @@ public class CardHolderTest {
     }
 
     @Test
-    void shouldRunUrl(){
+    void shouldRunByForm(){
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Олег Иванов");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79998887755");
@@ -47,6 +43,5 @@ public class CardHolderTest {
         String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
         String actual = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText().trim();
         assertEquals(expected, actual);
-
     }
 }

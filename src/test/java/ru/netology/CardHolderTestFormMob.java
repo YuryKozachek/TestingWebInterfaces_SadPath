@@ -15,12 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CardHolderTestFormMob {
     private WebDriver driver;
 
-
     @BeforeAll
     static void setUpAll() {
-//        System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
         WebDriverManager.chromedriver().setup();
-
     }
 
     @BeforeEach
@@ -31,7 +28,6 @@ public class CardHolderTestFormMob {
         options.addArguments("--headless");
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-
     }
 
     @AfterEach
@@ -41,15 +37,14 @@ public class CardHolderTestFormMob {
     }
 
     @Test
-    void shouldRunUrl(){
+    void shouldCheckFormPhone(){
         driver.get("http://localhost:9999/");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Олег Иванов");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+7999");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.cssSelector("[role=button]")).click();
         String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
-        String actual = driver.findElement(By.cssSelector("[data-test-id=phone] .input__sub")).getText().trim();
+        String actual = driver.findElement(By.cssSelector("[data-test-id='phone'].input_invalid .input__sub")).getText().trim();
         assertEquals(expected, actual);
-
     }
 }
